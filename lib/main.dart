@@ -15,13 +15,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(
-        create: (context) => LoginBloc(),
-        child: const LoginPage(),
-      ),
+      initialRoute: LoginPage.routeName,
       routes: {
-        HomePage.routeName: (_) => HomePage(),
-        LoginPage.routeName: (_) => const LoginPage(),
+        HomePage.routeName: (context) => BlocProvider.value(
+              value: LoginBloc(),
+              child: HomePage(),
+            ),
+        LoginPage.routeName: (context) => BlocProvider.value(
+              value: LoginBloc(),
+              child: const LoginPage(),
+            ),
       },
     );
   }

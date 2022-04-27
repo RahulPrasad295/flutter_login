@@ -15,9 +15,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       else {
         final isValid = Repository().validate(event.username, event.password);
 
-        if (isValid.success == true)
+        if (isValid.success == true) {
+          print(isValid.uuid);
           emit(LoginSuccess(isValid.uuid));
-        else
+        } else
           emit(LoginFailed('Wrong Email/Password'));
       }
     });
